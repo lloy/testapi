@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright (c) 2013 Hewlett-Packard Development Company, L.P.
 #
-# Author: Hardy.zheng <wei.zheng@yun-idc>
+# Author: Hardy.zheng <lenocooool@gmail.com>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ setup(
     version='1.0',
     description='firewallapi',
     author='hardy.Zheng',
-    author_email='wei.zheng@yun-idc.com',
+    author_email='lenocooool@gmail.com',
     install_requires=[
         'lxml>=2.3',
         'pecan>=0.4.5',

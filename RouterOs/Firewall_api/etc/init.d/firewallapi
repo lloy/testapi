@@ -11,7 +11,7 @@ PIDFILE=/var/run/$NAME.pid
 DAEMON=/usr/bin/$NAME
 
 #DAEMON_OPTS="--baz=quux"
-DAEMON_OPTS="--config=/etc/firewallapi/firewall_api.cfg"
+DAEMON_OPTS="--config-file=/etc/firewallapi/firewall_api.cfg"
 RETVAL=0
 
 export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
