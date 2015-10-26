@@ -11,8 +11,8 @@ from firewallapi import cfg
 
 
 def prepare_service(argv):
-    import gettext
-    gettext.install('firewallapi', unicode=1)
+    # import gettext
+    # gettext.install('firewallapi', unicode=1)
     conf = cfg.CONF
     log.register_options(conf)
     # log_levels = (cfg.CONF.default_log_levels + ['firewallapi=DEBUG'])

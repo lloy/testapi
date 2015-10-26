@@ -10,10 +10,10 @@ import wsmeext.pecan as wsme_pecan
 from pecan import rest
 from pecan import request
 from firewallapi.model import Vm
-from firewallapi import exc
+# from firewallapi import exc
 
 
-LOG = logging.getLogger('firewallapi')
+LOG = logging.getLogger(__name__)
 
 
 class VmController(rest.RestController):

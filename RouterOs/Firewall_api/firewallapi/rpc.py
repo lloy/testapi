@@ -43,12 +43,12 @@ NOTIFIER = None
 
 def init(conf):
     global TRANSPORT, NOTIFIER
+    set_defaults(conf.oslo_messaging_rabbit.control_exchange)
     TRANSPORT = messaging.get_transport(conf,
                                         allowed_remote_exmods=[],
                                         aliases={})
     print TRANSPORT
     NOTIFIER = messaging.Notifier(TRANSPORT, serializer=None)
-    set_defaults(conf.oslo_messaging_rabbit.control_exchange)
 
 
 def cleanup():
@@ -136,6 +136,9 @@ def get_target(topic, version):
         version = '1.0'
     if not topic:
         topic = 'firewall'
+    print topic, version
     return messaging.Target(exchange=CONF.oslo_messaging_rabbit.control_exchange,
                             topic=topic,
                             version=version)
+    # return messaging.Target(topic=topic,
+                            # version=version)
