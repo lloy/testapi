@@ -1,0 +1,71 @@
+#!/bin/sh
+#
+
+# chkconfig: 2345 20 80
+# description "cds-agent"
+
+# set -e 
+
+NAME=cds-agent
+PIDFILE=/var/run/$NAME.pid
+DAEMON=/usr/bin/$NAME
+
+#DAEMON_OPTS="--baz=quux"
+DAEMON_OPTS="--config=/etc/cds/cds.cfg"
+RETVAL=0
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+. /etc/init.d/functions
+
+test -f $DAEMON || exit 0
+
+chkpid(){
+    pgrep $NAME > /dev/null 2>&1 
+    if [ $? -eq 0 ];then
+        return 0
+    else
+        return 1
+    fi
+}
+case "$1" in
+    start)
+        if chkpid;then
+            echo "$NAME is already running"
+            exit 1
+        fi
+        echo  "Start Service $NAME.."
+        daemon $DAEMON $DAEMON_OPTS > /dev/null 2>&1 & 
+        if [ $? -eq 0 ];then
+            echo_success
+        else
+            echo_failure
+        fi
+        ;;
+    stop)
+        echo  "Stop Service $NAME.."
+        killproc $DAEMON
+        ;;
+    status)
+        status  $DAEMON
+        if [ $? -eq 0 ];then
+            echo_success
+        else
+            echo_failure
+        fi
+        ;;
+    restart)
+        echo  "Stop service $NAME.."
+        killproc $DAEMON
+        sleep 2
+        echo  "Start service $NAME.."
+        daemon $DAEMON $DAEMON_OPTS > /dev/null 2>&1 & 
+        if [ $? -eq 0 ];then
+            echo_success
+        else
+            echo_failure
+        fi
+        ;;
+    *):
+        echo "Usage: $1 {start|stop|status|restart}"
+        exit 2
+esac
